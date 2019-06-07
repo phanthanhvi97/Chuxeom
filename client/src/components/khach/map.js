@@ -49,7 +49,7 @@ export default class BanDo extends Component {
                         </div>
                     </div>
                 </div>
-                <Map className="map" center={position} zoom={13}>
+                <Map className="map" center={position} zoom={16}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

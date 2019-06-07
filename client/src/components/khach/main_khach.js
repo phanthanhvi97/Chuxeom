@@ -49,10 +49,10 @@ class main_khach extends Component {
                         </div>
                     </nav>
                     <div class="row">
-                        <div class="col-lg-2">
+                        <div class="col-lg-2 mt-3">
                             hihi
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-lg-10 mt-3">
                             <BanDo/>
                         </div>
                     </div>
