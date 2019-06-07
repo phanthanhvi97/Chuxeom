@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Link, Redirect} from "react-router-dom";
-import SimpleMap from './map'
+import {Redirect} from "react-router-dom";
+import BanDo from './map'
 class main_khach extends Component {
     constructor(props) {
         super(props)
@@ -48,12 +48,12 @@ class main_khach extends Component {
                             </div>
                         </div>
                     </nav>
-                    <div className="row">
-                        <div className="col-lg-2">
-                            
+                    <div class="row">
+                        <div class="col-lg-2">
+                            hihi
                         </div>
-                        <div className="col-lg-10">
-                            <SimpleMap/>
+                        <div class="col-lg-10">
+                            <BanDo/>
                         </div>
                     </div>
                 </div>

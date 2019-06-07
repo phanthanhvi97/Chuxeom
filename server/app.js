@@ -18,6 +18,8 @@ app.use(bodyParser.json())
 
 
 var io = require('socket.io')(server)
+
+
 app.post('/xacthuc',async(req, res)=>{
     
     var {sdt, password} = req.body
@@ -49,3 +51,15 @@ app.post('/dangky',async(req, res)=>{
     
 })
 server.listen(8080, console.log('Da khoi tao server 8080'))
+
+
+var arr_pos=[]
+io.on('connection',(socket)=>{
+    io.sockets.emit('server_send_pos', arr_pos)
+    console.log('da co client ket noi: '+ socket.id)
+    socket.on('client_send_pos',(data)=>{
+        arr_pos.push(data);
+        console.log(arr_pos)
+        io.sockets.emit('server_send_pos', arr_pos)
+    })
+} )
