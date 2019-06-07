@@ -68,8 +68,11 @@ class Login extends Component {
         }
     }
     render() {
-        if(this.state.loggedIn){
-            return <Redirect to='/main_khach'/>
+        // if(this.state.loggedIn){
+        //     return <Redirect to='/main_khach'/>
+        // }
+        if(localStorage.getItem('token')){
+            return <Redirect to ='/main_khach'/>
         }
         return (
             <div className="container-fluid">

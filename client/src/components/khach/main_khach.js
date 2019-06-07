@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 import BanDo from './map'
 class main_khach extends Component {
     constructor(props) {
@@ -20,6 +20,9 @@ class main_khach extends Component {
         if(this.state.loggingIn===false){
             return <Redirect to='/'></Redirect>
         }
+        // if(sessionStorage.getItem('token')===''){
+        //     return <Redirect to='/'></Redirect>
+        // }
         return (
             <div>
                 <div className="container-fluid">
@@ -32,10 +35,10 @@ class main_khach extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavId">
                             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Trở thành đối tác <span className="sr-only">(current)</span></a>
+                                    <a className="nav-link" href="/main_khach/trothanhdoitac">Trở thành đối tác</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Về chúng tôi</a>
+                                    <a className="nav-link" href="/main_khach/vechungtoi">Về chúng tôi</a>
                                 </li>
                                 
                             </ul>
