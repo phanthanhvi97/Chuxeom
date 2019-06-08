@@ -7,6 +7,7 @@ var chuyendi = new Schema({
     diachiden: String,
     status: String,
     sokm: Number,
-    sotien: Number
+    sotien: Number,
+    report: String
 })
 module.exports=mongoose.model('cd',chuyendi)

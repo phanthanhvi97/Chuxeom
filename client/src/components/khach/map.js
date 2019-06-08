@@ -4,11 +4,18 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
 import car from './xe.jpg'
 import './map.css'
+
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.js'
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
+import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
+
+
 var car_icon = L.icon({
     iconUrl: car,
     iconSize: [26, 40]
 })
 export default class BanDo extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -29,27 +36,37 @@ export default class BanDo extends Component {
         var data_send = [document.getElementById('pos_x').value, document.getElementById('pos_y').value]
         this.socket.emit('client_send_pos', data_send);
     }
+    componentDidMount() {
+        const map = this.leafletMap.leafletElement
+        L.Routing.control({
+            waypoints: [
+                L.latLng(10.76237, 106.68170),
+                L.latLng(10.77257, 106.69802)
+            ],
+            routeWhileDragging: true
+        }).addTo(map);
+    }
     render() {
         const position = [this.state.pos.x, this.state.pos.y]
         return (
             <div>
                 <div>
-                    <div className="form-group">
-                        <div className="row">
-                            <div className="col-lg-2">
-                                <input type="text"
-                                    className="form-control" name="x" id="pos_x" required placeholder="Toa do x" />
-                            </div>
-                            <div className="col-lg-2">
-                                <input type="text"
-                                    className="form-control" name="y" id="pos_y" required placeholder="Toa do y" />
-                            </div>
+                    {/* <div className="form-group"> */}
+                        {/* <div className="row"> */}
+                            {/* <div className="col-lg-2"> */}
+                                {/* <input type="text" */}
+                                    {/* className="form-control" name="x" id="pos_x" required placeholder="Toa do x" /> */}
+                            {/* </div> */}
+                            {/* <div className="col-lg-2"> */}
+                                {/* <input type="text" */}
+                                    {/* className="form-control" name="y" id="pos_y" required placeholder="Toa do y" /> */}
+                            {/* </div> */}
                             {/* eslint-disable-next-line */}
-                            <a className="btn btn-primary" role="button" onClick={this.send_pos}>Select</a>
-                        </div>
-                    </div>
+                            {/* <a className="btn btn-primary" role="button" onClick={this.send_pos}>Select</a> */}
+                        {/* </div> */}
+                    {/* </div> */}
                 </div>
-                <Map className="map" center={position} zoom={16}>
+                <Map className="map" center={position} zoom={16} ref={map => { this.leafletMap = map; }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

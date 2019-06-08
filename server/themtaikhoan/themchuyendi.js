@@ -10,7 +10,8 @@ var cd = [
         diachiden: 'b',
         status: 'da xong',
         sokm: 2,
-        sotien: 12000
+        sotien: 12000,
+        report: 'tot'
     })
 ]
 var done = 0;

@@ -6,6 +6,10 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter} from "react-router-dom";
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.js'
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
+import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
+
 ReactDOM.render(
     <BrowserRouter>
         <App />
@@ -13,7 +17,4 @@ ReactDOM.render(
 
 , document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
