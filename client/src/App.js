@@ -18,9 +18,7 @@ class App extends Component {
           <Route path='/main_khach/khachdoimatkhau' exact component={khachdoimatkhau} />
           <Route path='/khach_login' exact component={Khach_Login} />
           <Route path='/taixe_login' exact component={taixe_login} />
-
           <Route path='/admin_login' exact component={admin_login} />
-
           <Route path='/main_khach/trothanhdoitac' exact component={trothanhdoitac} />
           <Route path='/main_khach/vechungtoi' exact component={vechungtoi} />
         </Switch>
