@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect, Link} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import BanDo from './map'
 class main_khach extends Component {
     constructor(props) {
@@ -20,9 +20,6 @@ class main_khach extends Component {
         if(this.state.loggingIn===false){
             return <Redirect to='/'></Redirect>
         }
-        // if(sessionStorage.getItem('token')===''){
-        //     return <Redirect to='/'></Redirect>
-        // }
         return (
             <div>
                 <div className="container-fluid">
@@ -43,9 +40,11 @@ class main_khach extends Component {
                                 
                             </ul>
                             <div className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Người dùng</a>
+                                    {/* eslint-disable-next-line */}
+                                    <button className="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Người dùng</button>
                                     <div className="dropdown-menu" aria-labelledby="dropdownId">
-                                        <a className="dropdown-item" href="#">Đổi mật khẩu</a>
+                                    {/* eslint-disable-next-line */}
+                                        <button className="dropdown-item">Đổi mật khẩu</button>
                                         <a className="dropdown-item" href="/" onClick={this.dangxuat}>Đăng xuất</a>
                                     </div>
                             </div>
