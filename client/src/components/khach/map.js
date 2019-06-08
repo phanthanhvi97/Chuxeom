@@ -45,10 +45,18 @@ export default class BanDo extends Component {
                 L.latLng(10.76237, 106.68170),
                 L.latLng(10.77257, 106.69802)
             ],
+            
             routeWhileDragging: true,
-            geocoder: L.Control.Geocoder.nominatim()
+            geocoder: L.Control.Geocoder.nominatim(),  
+            
+        createMarker: function(i, wp) {
+            return L.marker(wp.latLng, {
+                draggable: true,
+                icon: markicon
+            }).addTo(map);}
+
         }).addTo(map);
-        // L.Control.geocoder().addTo(map)
+
     }
     render() {
         const position = [this.state.pos.x, this.state.pos.y]
@@ -79,9 +87,9 @@ export default class BanDo extends Component {
                         attribution="&copy;  contributors"
                         
                     />
-                    <Marker  position={position} icon={markicon}>
+                    {/* <Marker  position={position} icon={markicon}>
                                     <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-                                </Marker>
+                    </Marker> */}
                     {/* {this.state.data_pos !== null ?
                         (this.state.data_pos).map((data, i) => {
                             return (
@@ -92,6 +100,11 @@ export default class BanDo extends Component {
                         })
                         : ''
                     } */}
+
+
+
+
+                    
                 </Map>
             </div>
         )
