@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/chuxeom')
 var tkam=[
     new tkadmin({
-        sdt: '789',
+        username: '789',
         password: '789'
     })
 ]

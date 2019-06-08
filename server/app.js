@@ -28,10 +28,40 @@ app.use(bodyParser.json())
 var io = require('socket.io')(server)
 
 
-app.post('/xacthuc',async(req, res)=>{
+app.post('/xacthuckhach',async(req, res)=>{
     
     var {sdt, password} = req.body
     await tkk.findOne({sdt:sdt,password:password},(err,data)=>{
+        if(err){
+            return handleError(err)
+        }
+        if(data ===null)
+            return res.json({status: false})
+        else {
+            return res.json({status: true, kq: data})
+        }
+    })  
+})
+
+app.post('/xacthuctaixe',async(req, res)=>{
+    
+    var {sdt, password} = req.body
+    await tktx.findOne({sdt:sdt,password:password},(err,data)=>{
+        if(err){
+            return handleError(err)
+        }
+        if(data ===null)
+            return res.json({status: false})
+        else {
+            return res.json({status: true, kq: data})
+        }
+    })  
+})
+
+app.post('/xacthucadmin',async(req, res)=>{
+    
+    var {username, password} = req.body
+    await tkam.findOne({username:username,password:password},(err,data)=>{
         if(err){
             return handleError(err)
         }

@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import {Redirect} from "react-router-dom";
 
-export default class dashboard extends Component {
+export default class main_taixe extends Component {
     constructor(props) {
         super(props)
-        const tokentaixe = localStorage.getItem('tokenadmin')
+        const tokentaixe = localStorage.getItem('tokentaixe')
         let loggingIn = true
         if(tokentaixe===null){
             loggingIn=false
         }
         this.state = {
             loggingIn
-        }
-    }
+        };
+    };
+
     dangxuat=()=>{
-        localStorage.removeItem('tokenadmin')
+        localStorage.removeItem('tokentaixe')
     }
     render() {
         if(this.state.loggingIn===false){
@@ -22,7 +23,7 @@ export default class dashboard extends Component {
         }
         return (
             <div>
-                day la dashboard
+                day la main tai xe
                 <a onClick={this.dangxuat} href='/'>
                     dang xuat
                 </a>

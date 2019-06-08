@@ -23,7 +23,7 @@ class Khach_Login extends Component {
 
     onSubmit() {
         if(this.state.sdt!=='' && this.state.password !==''){
-            axios.post('http://localhost:8080/xacthuc', {
+            axios.post('http://localhost:8080/xacthuckhach', {
             sdt: this.state.sdt,
             password: this.state.password
           })
