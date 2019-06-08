@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import io from 'socket.io-client/dist/socket.io'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
-import car from './xe.jpg'
+import mark from './mark.png'
 import './map.css'
 
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.js'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
 
-
-var car_icon = L.icon({
-    iconUrl: car,
+import 'leaflet-control-geocoder/dist/Control.Geocoder.js'
+import 'leaflet-control-geocoder/dist/Control.Geocoder.css'
+// import 'leaflet-control-geocoder/src/geocoders/nominatim.js'
+var markicon = L.icon({
+    iconUrl: mark,
     iconSize: [26, 40]
 })
 export default class BanDo extends Component {
@@ -43,14 +45,19 @@ export default class BanDo extends Component {
                 L.latLng(10.76237, 106.68170),
                 L.latLng(10.77257, 106.69802)
             ],
-            routeWhileDragging: true
+            routeWhileDragging: true,
+            geocoder: L.Control.Geocoder.nominatim()
         }).addTo(map);
+        // L.Control.geocoder().addTo(map)
     }
     render() {
         const position = [this.state.pos.x, this.state.pos.y]
+        // const position = [10.762924, 106.6827]
+
         return (
             <div>
                 <div>
+                    <p>{position}</p>
                     {/* <div className="form-group"> */}
                         {/* <div className="row"> */}
                             {/* <div className="col-lg-2"> */}
@@ -69,18 +76,22 @@ export default class BanDo extends Component {
                 <Map className="map" center={position} zoom={16} ref={map => { this.leafletMap = map; }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                        attribution="&copy;  contributors"
+                        
                     />
-                    {this.state.data_pos !== null ?
+                    <Marker  position={position} icon={markicon}>
+                                    <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+                                </Marker>
+                    {/* {this.state.data_pos !== null ?
                         (this.state.data_pos).map((data, i) => {
                             return (
-                                <Marker key={i} position={data} icon={car_icon}>
+                                <Marker key={i} position={data} icon={markicon}>
                                     <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
                                 </Marker>
                             )
                         })
                         : ''
-                    }
+                    } */}
                 </Map>
             </div>
         )
