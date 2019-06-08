@@ -44,7 +44,7 @@ class main_khach extends Component {
                                     <button className="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Người dùng</button>
                                     <div className="dropdown-menu" aria-labelledby="dropdownId">
                                     {/* eslint-disable-next-line */}
-                                        <button className="dropdown-item">Đổi mật khẩu</button>
+                                        <a href='main_khach/khachdoimatkhau' className="dropdown-item">Đổi mật khẩu</a>
                                         <a className="dropdown-item" href="/" onClick={this.dangxuat}>Đăng xuất</a>
                                     </div>
                             </div>
