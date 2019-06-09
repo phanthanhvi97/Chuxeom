@@ -70,13 +70,13 @@ class main_khach extends Component {
                                 <input type="text" className="form-control" placeholder="Họ tên" />
                             </div>
                             
-                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Đặt xe</button>
+                            <button type="button" className="btn btn-primary" data-toggle="button" aria-pressed="false" autoComplete="off">Đặt xe</button>
 
 
                         </div>
 
                         
-                        <div class="col-lg-10 mt-3">
+                        <div className="col-lg-10 mt-3">
                             <BanDo />
                         </div>
                     </div>

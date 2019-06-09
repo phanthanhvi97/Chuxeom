@@ -4,11 +4,9 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
 import mark from './mark.png'
 import './map.css'
-
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.js'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
-
 import 'leaflet-control-geocoder/dist/Control.Geocoder.js'
 import 'leaflet-control-geocoder/dist/Control.Geocoder.css'
 // import 'leaflet-control-geocoder/src/geocoders/nominatim.js'
@@ -17,7 +15,6 @@ var markicon = L.icon({
     iconSize: [26, 40]
 })
 export default class BanDo extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +22,9 @@ export default class BanDo extends Component {
                 x: 10.762924,
                 y: 106.6827,
             },
-            data_pos: null
+            data_pos: null,
+            distance: '0',
+            time: '0'
         }
         this.socket = io('http://localhost:8080/', { jsonp: false })
         this.socket.on('server_send_pos', (data) => {
@@ -40,15 +39,13 @@ export default class BanDo extends Component {
     }
     componentDidMount() {
         const map = this.leafletMap.leafletElement
-        L.Routing.control({
+        var x = L.Routing.control({
             waypoints: [
                 L.latLng(10.76237, 106.68170),
                 L.latLng(10.77257, 106.69802)
             ],
-            
             routeWhileDragging: true,
             geocoder: L.Control.Geocoder.nominatim(),  
-            
         createMarker: function(i, wp) {
             return L.marker(wp.latLng, {
                 draggable: true,
@@ -56,16 +53,26 @@ export default class BanDo extends Component {
             }).addTo(map);}
 
         }).addTo(map);
-
+        x.on('routesfound', (e)=> {
+            var routes = e.routes;
+            var a = routes[0].summary.totalDistance 
+            var tg=routes[0].summary.totalTime
+            tg=Math.round(tg/60)
+            a=Math.round(a/1000)
+            this.setState({
+                distance: a,
+                time: tg
+            })
+        }).addTo(map)
     }
     render() {
         const position = [this.state.pos.x, this.state.pos.y]
         // const position = [10.762924, 106.6827]
-
         return (
             <div>
                 <div>
-                    <p>{position}</p>
+                    {/* <p>{position}</p> */}
+                    <p>{this.state.distance}</p>
                     {/* <div className="form-group"> */}
                         {/* <div className="row"> */}
                             {/* <div className="col-lg-2"> */}
@@ -87,9 +94,9 @@ export default class BanDo extends Component {
                         attribution="&copy;  contributors"
                         
                     />
-                    {/* <Marker  position={position} icon={markicon}>
+                    <Marker  position={position} icon={markicon}>
                                     <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-                    </Marker> */}
+                    </Marker>
                     {/* {this.state.data_pos !== null ?
                         (this.state.data_pos).map((data, i) => {
                             return (
@@ -99,12 +106,7 @@ export default class BanDo extends Component {
                             )
                         })
                         : ''
-                    } */}
-
-
-
-
-                    
+                    } */}  
                 </Map>
             </div>
         )

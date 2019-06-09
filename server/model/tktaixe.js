@@ -8,6 +8,8 @@ var tktaixe = new Schema({
     status: String,
     vitien: Number,
     status: String,
-    vitri: String
+    vitri: String,
+    sao:[]
+
 })
 module.exports=mongoose.model('tktx',tktaixe)
