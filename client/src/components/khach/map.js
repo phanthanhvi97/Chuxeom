@@ -50,8 +50,11 @@ export default class BanDo extends Component {
         const map = this.leafletMap.leafletElement
         var x = L.Routing.control({
             waypoints: [
-                L.latLng(10.76237, 106.68170),
-                L.latLng(10.77257, 106.69802)
+                // L.latLng(10.76237, 106.68170),
+                // L.latLng(10.77257, 106.69802)
+
+                // L.latLng(10.76237, 106.68170),
+                // L.latLng(10.77257, 106.69802)
             ],
             routeWhileDragging: true,
             geocoder: L.Control.Geocoder.nominatim(),
