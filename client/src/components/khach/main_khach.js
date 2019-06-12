@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link} from "react-router-dom";
 import BanDo from './map'
 class main_khach extends Component {
     constructor(props) {
@@ -32,50 +32,21 @@ class main_khach extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavId">
                             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/main_khach/trothanhdoitac">Trở thành đối tác</a>
+                                    <a className="nav-link" href="/main_khach/thongtinnguoidung">Thông tin người dùng</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/main_khach/vechungtoi">Về chúng tôi</a>
+                                    <a className="nav-link" href="/main_khach/khachdoimatkhau">Đổi mật khẩu</a>
                                 </li>
-
                             </ul>
-                            <div className="nav-item dropdown">
-                                {/* eslint-disable-next-line */}
-                                <button className="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Người dùng</button>
-                                <div className="dropdown-menu" aria-labelledby="dropdownId">
-                                    {/* eslint-disable-next-line */}
-                                    <a href='main_khach/khachdoimatkhau' className="dropdown-item">Đổi mật khẩu</a>
-                                    <a className="dropdown-item" href="/" onClick={this.dangxuat}>Đăng xuất</a>
-                                </div>
-                            </div>
+                            <Link to='/'><button type="button" class="btn btn-danger" onClick={this.dangxuat}>Đăng xuất</button></Link>
                         </div>
                     </nav>
                     <div className="row">
-
                         <div className="col-lg-2 mt-3">
-                            <br/>
-
-                            <div className="input-group mb-3">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" id="basic-addon1">Số điện thoại</span>
-                                </div>
-                                <input type="number" className="form-control" placeholder="SDT" />
-                            </div>
-
-
-                            <div className="input-group mb-3">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" id="basic-addon1">Họ tên</span>
-                                </div>
-                                <input type="text" className="form-control" placeholder="Họ tên" />
-                            </div>
+                            <h3>Thông tin chuyến đi</h3>
                             
                             <button type="button" className="btn btn-primary" data-toggle="button" aria-pressed="false" autoComplete="off">Đặt xe</button>
-
-
-                        </div>
-
-                        
+                        </div>                        
                         <div className="col-lg-10 mt-3">
                             <BanDo />
                         </div>

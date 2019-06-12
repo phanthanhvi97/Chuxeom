@@ -9,8 +9,6 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
 import 'leaflet-control-geocoder/dist/Control.Geocoder.js'
 import 'leaflet-control-geocoder/dist/Control.Geocoder.css'
-
-// import 'leaflet-control-geocoder/src/geocoders/nominatim.js'
 var markicon = L.icon({
     iconUrl: mark,
     iconSize: [26, 40]
@@ -52,9 +50,6 @@ export default class BanDo extends Component {
             waypoints: [
                 // L.latLng(10.76237, 106.68170),
                 // L.latLng(10.77257, 106.69802)
-
-                // L.latLng(10.76237, 106.68170),
-                // L.latLng(10.77257, 106.69802)
             ],
             routeWhileDragging: true,
             geocoder: L.Control.Geocoder.nominatim(),
@@ -80,26 +75,9 @@ export default class BanDo extends Component {
     }
     render() {
         const position = [this.state.pos.x, this.state.pos.y]
-        // const position = [10.762924, 106.6827]
         return (
             <div>
                 <div>
-                    {position}
-                    <a name="location" id="location" className="btn btn-primary" role="button" onClick={this.vitrihientai}>Vi tri cua ban</a>
-                    {/* <div className="form-group"> */}
-                    {/* <div className="row"> */}
-                    {/* <div className="col-lg-2"> */}
-                    {/* <input type="text" */}
-                    {/* className="form-control" name="x" id="pos_x" required placeholder="Toa do x" /> */}
-                    {/* </div> */}
-                    {/* <div className="col-lg-2"> */}
-                    {/* <input type="text" */}
-                    {/* className="form-control" name="y" id="pos_y" required placeholder="Toa do y" /> */}
-                    {/* </div> */}
-                    {/* eslint-disable-next-line */}
-                    {/* <a className="btn btn-primary" role="button" onClick={this.send_pos}>Select</a> */}
-                    {/* </div> */}
-                    {/* </div> */}
                 </div>
                 <Map className="map" center={position} zoom={16} ref={map => { this.leafletMap = map; }}>
                     <TileLayer

@@ -76,7 +76,7 @@ app.post('/xacthucadmin',async(req, res)=>{
 app.post('/dangky',async(req, res)=>{
     
     var {sdt, password} = req.body
-    if(await tk.findOne({sdt:sdt})!==null){
+    if(await tkk.findOne({sdt:sdt})!==null){
         return res.json(false)
     }
     else{
@@ -89,6 +89,20 @@ app.post('/dangky',async(req, res)=>{
     
 })
 
+app.post('/khachdoipass', async(req, res)=>{
+    var {oldpass, newpass,_id}=req.body
+    // console.log(oldpass)
+    tkk.findOneAndUpdate({_id:_id,password:oldpass},{$set:{password:newpass}},{new:true},(err, data)=>{
+        if(err){
+            return handleError(err)
+        }
+        if(data ===null)
+            return res.json({status: false})
+        else {
+            return res.json({status: true})
+        }
+    })
+})
 
 
 
