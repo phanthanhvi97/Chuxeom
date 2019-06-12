@@ -2,20 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+// import Main_Khach from './components/khach/main_khach'
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import 'leaflet/dist/leaflet.js'
 import 'leaflet/dist/leaflet.css'
-// import 'leaflet-routing-machine/dist/leaflet-routing-machine.js'
-// import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
-// import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
-// import 'leaflet-control-geocoder/dist/Control.Geocoder'
 
+import {Provider} from 'react-redux'
+import Store from './components/store/store'
+var store = Store()
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+            {/* <main_khach /> */}
+        </BrowserRouter>
+    </Provider>
 
-, document.getElementById('root'));
+
+    , document.getElementById('root'));
 
 serviceWorker.unregister();

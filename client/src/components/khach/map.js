@@ -9,17 +9,20 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
 import 'leaflet-control-geocoder/dist/Control.Geocoder.js'
 import 'leaflet-control-geocoder/dist/Control.Geocoder.css'
+
+import {connect} from 'react-redux'
+
 var markicon = L.icon({
     iconUrl: mark,
     iconSize: [26, 40]
 })
-export default class BanDo extends Component {
+ class BanDo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             pos: {
-                x: 10.762924,
-                y: 106.6827,
+                x: 10.77257,
+                y: 106.69802,
             },
             data_pos: null,
             distance: '0',
@@ -31,25 +34,32 @@ export default class BanDo extends Component {
         //         data_pos: data
         //     })
         // })
-        // this.showPosition=this.showPosition.bind(this)
+        // this.vitrihientai=this.vitrihientai.bind(this)
     }
-    vitrihientai = () => {
-        navigator.geolocation.watchPosition((pos) => {
-            this.setState({
-                pos: { x: pos.coords.latitude, y: pos.coords.longitude },
-            });
-        });
+    vitrihientai() {
+        // navigator.geolocation.getCurrentPosition((pos) => {
+        //     this.setState({
+        //     pos: { x: pos.coords.latitude, y: pos.coords.longitude },
+        //     });
+        // });
+        this.setState({
+            pos: {
+                x: 10.32423423,
+                y: 106.2343242
+            }
+        })
     }
-    send_pos = () => {
-        var data_send = [document.getElementById('pos_x').value, document.getElementById('pos_y').value]
-        this.socket.emit('client_send_pos', data_send);
-    }
+    
+    // send_pos = () => {
+    //     var data_send = [document.getElementById('pos_x').value, document.getElementById('pos_y').value]
+    //     this.socket.emit('client_send_pos', data_send);
+    // }
     componentDidMount() {
         const map = this.leafletMap.leafletElement
         var x = L.Routing.control({
             waypoints: [
-                // L.latLng(10.76237, 106.68170),
-                // L.latLng(10.77257, 106.69802)
+                L.latLng(this.state.pos.x, this.state.pos.y),
+                L.latLng(10.763049, 106.682124)
             ],
             routeWhileDragging: true,
             geocoder: L.Control.Geocoder.nominatim(),
@@ -59,31 +69,37 @@ export default class BanDo extends Component {
                     icon: markicon
                 }).addTo(map);
             }
-
         }).addTo(map);
         x.on('routesfound', (e) => {
             var routes = e.routes;
             var a = routes[0].summary.totalDistance
             var tg = routes[0].summary.totalTime
-            tg = Math.round(tg / 60)
-            a = Math.round(a / 1000)
+            
+            tg = Math.ceil(tg / 60)
+            a = Math.ceil(a / 1000)
             this.setState({
                 distance: a,
                 time: tg
             })
+            var {dispatch} = this.props
+            dispatch({type:"CHANGE",item:a})
         }).addTo(map)
     }
     render() {
         const position = [this.state.pos.x, this.state.pos.y]
+        // const position=[10.77257, 106.69802]
+        
+        // console.log(store.getState())
+
         return (
             <div>
                 <div>
+                    <button type="button" className="btn btn-primary" onClick={() => this.vitrihientai()}>Lấy vị trí hiện tại</button>
                 </div>
                 <Map className="map" center={position} zoom={16} ref={map => { this.leafletMap = map; }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution="&copy;  contributors"
-
                     />
                     <Marker position={position} icon={markicon}>
                         <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
@@ -103,3 +119,7 @@ export default class BanDo extends Component {
         )
     }
 }
+export default connect(state =>{
+    return {temp:state.temp}
+})(BanDo)
+// module.exports=store;
