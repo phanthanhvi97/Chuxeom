@@ -47,7 +47,7 @@ class main_khach extends Component {
                 quangduong: quangduong
             })
             .then((kq)=>{
-
+                
             })
         }
 

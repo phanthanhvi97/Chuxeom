@@ -115,30 +115,88 @@ app.post('/khachdoipass', async (req, res) => {
     })
 })
 
-app.post('/datxe', (req, res) => {
+app.post('/datxe', async (req, res) => {
 
-    var { xbd, ybd, xkt, ykt, id, km, sotien } = req.body
+    var { xbd, ybd, xkt, ykt, id, km, sotien, quangduong } = req.body
     var start = []
     start.push(xbd, ybd)
 
-    var min = 5.0000001
-    var _id=''
     tktx.find({ status: true }, (err, data) => {
+        var min = 5.0000001
+        var _id = ''
+
         for (var i = 0; i < data.length; i++) {
             var a = tinhkc(parseFloat(start[0]), parseFloat(start[1]), data[i].vitri[0], data[i].vitri[1])
-            if(a<min){
-                min=a
-                _id=data[i]._id
+
+            if (a < min) {
+                min = a
+                _id = data[i]._id
             }
         }
         // console.log(min)
-        // console.log(_id)
+        if (min === 5.0000001) {
+            res.json(false)
+            console.log('haha')
+        }
+        else {
+            // console.log(_id)
+            cd.create({
+                idkhach: id,
+                idtaixe: _id,
+                quangduong: quangduong,
+                sokm: km,
+                sotien: sotien,
+                status: 'waiting',
+                xdi:xbd,
+                ydi:ybd,
+                xden:xkt,
+                yden: ykt
+            })
+            res.json(true)
+
+        }
     })
-    if(min!==5.0000001){
-        return res.json({})
-    }
+
 })
 
+app.post('/taixeguitoado',(req, res)=>{
+    var {x, y, status, id}= req.body
+    var vitri=[]
+    vitri.push(x)
+    vitri.push(y)
+    tktx.findOneAndUpdate({_id:id},{$set:{ vitri:vitri, status:status}},{new:true},(err, data)=>{
+        if(err){
+            return handleError(err)
+        }
+    })
+
+})
+
+app.post('/taixedangxuat',(req, res)=>{
+    var {status, id}= req.body
+    tktx.findOneAndUpdate({_id:id},{$set:{status:status}},{new:true},(err, data)=>{
+        if(err){
+            return handleError(err)
+        }
+    })
+
+})
+
+
+app.post('/chuyendimoi',(req, res)=>{
+    var x
+    cd.findOne({idtaixe:x, status:'waiting'},(err,data)=>{
+        if(err){
+            return handleError(err)
+        }
+        if(data===null){
+            return res.json({chuyendi:false})
+        }
+        else{
+            return res.json({chuyendi: true, kq: data})
+        }
+    })
+})
 server.listen(8080, console.log('Da khoi tao server 8080'))
 // var arr_pos=[]
 // io.on('connection',(socket)=>{

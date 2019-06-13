@@ -8,6 +8,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import 'leaflet-routing-machine/dist/leaflet.routing.icons.png'
 import 'leaflet-control-geocoder/dist/Control.Geocoder.js'
 import 'leaflet-control-geocoder/dist/Control.Geocoder.css'
+import axios from 'axios';
 
 var markicon = L.icon({
     iconUrl: mark,
@@ -21,11 +22,40 @@ export default class BanDo extends Component {
                 x: 10.762924,
                 y: 106.6827,
             },
-            data_pos: null,
-            distance: '0',
-            time: '0'
+            // data_pos: null,
+            // distance: '0',
+            // time: '0'
+            x:10.762924,
+            y:106.6827
         }
     }
+    onChange=(event)=>{
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        this.setState({
+            [name]:value
+        }); 
+    }
+    onClick=()=>{
+        this.setState({
+            pos:{
+                x: this.state.x,
+                y: this.state.y
+            }
+        })
+        axios.post('http://localhost:8080/taixeguitoado',{
+            x: this.state.pos.x,
+            y: this.state.pos.y,
+            id: localStorage.getItem('tokentaixe'),
+            status: true
+        })
+        // .then((kq)=>{
+            
+        // })
+
+    }
+
     // vitrihientai = () => {
     //     navigator.geolocation.watchPosition((pos) => {
     //         this.setState({
@@ -73,21 +103,21 @@ export default class BanDo extends Component {
             <div>
                 <div className="container-fluid">
                     <div className='row'>
-                        <div class="col-lg-2 mt-2">
+                        <div className="col-lg-2 mt-2">
                             <p>Nhập vị trí của bạn</p>
                         </div>
-                        <div class="col-lg-2 mt-3">
+                        <div className="col-lg-2 mt-3">
                             <div className="form-group">
-                                <input type="text" className="form-control" name="x" id="" placeholder="Toạ độ x" />
+                                <input type="text" className="form-control" name="x" id="x" placeholder="Toạ độ x"  onChange={this.onChange}/>
                             </div>
                         </div>
-                        <div class="col-lg-2 mt-3">
+                        <div className="col-lg-2 mt-3">
                             <div className="form-group">
-                                <input type="text" className="form-control" name="y" id="" placeholder="Toạ độ y" />
+                                <input type="text" className="form-control" name="y" id="y" placeholder="Toạ độ y" onChange={this.onChange}/>
                             </div>
                         </div>
-                        <div class="col-lg-1 mt-3">
-                            <button name="" id="" class="btn btn-primary">OK</button>
+                        <div className="col-lg-1 mt-3">
+                            <button name="" id="" className="btn btn-primary" onClick={this.onClick}>OK</button>
                         </div>
                     </div>
                 </div>

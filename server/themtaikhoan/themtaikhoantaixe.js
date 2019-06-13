@@ -12,7 +12,8 @@ var tktx=[
         vitien: 200000,
         vitri: [10.740340,106.682611],
         sao:[5,5,1,4],
-        avatar: 'https://www.wwf.org.uk/sites/default/files/styles/content_slide_image/public/2016-10/Original_WW22776.jpg?h=66ac411f&itok=2Fh0YA7h'
+        avatar: 'https://www.wwf.org.uk/sites/default/files/styles/content_slide_image/public/2016-10/Original_WW22776.jpg?h=66ac411f&itok=2Fh0YA7h',
+        del: false
     })
 ]
 var done = 0;

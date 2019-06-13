@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from "react-router-dom";
 import BanDo from './map'
+import axios from 'axios';
 
 export default class main_taixe extends Component {
     constructor(props) {
@@ -14,9 +15,15 @@ export default class main_taixe extends Component {
             loggingIn
         };
     };
-
     dangxuat = () => {
+        var a= localStorage.getItem('tokentaixe')
         localStorage.removeItem('tokentaixe')
+        console.log(a)
+        axios.post('http://localhost:8080/taixedangxuat',{
+            id: a,
+            status: false
+        })
+        // .then
     }
     render() {
         if (this.state.loggingIn === false) {
@@ -54,10 +61,12 @@ export default class main_taixe extends Component {
                     </nav>
                 </div>
                 <div className="row">
-                    <div class="col-lg-2">
-                        
+                    <div className="col-lg-2 mt-5">
+                        <h4>Chuyến đi của bạn</h4>
+
+
                     </div>
-                    <div class="col-lg-10">
+                    <div className="col-lg-10">
                         <BanDo/>
                     </div>
                 </div>

@@ -54,12 +54,12 @@ class taixe_login extends Component {
         }
         return (
             <div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-4">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-lg-4">
                             Tai xe
                         </div>
-                        <div class="col-lg-4">
+                        <div className="col-lg-4">
                             <form >
                                 <div className="form-group">
                                     <label htmlFor="exampleInputEmail1">SDT</label>
@@ -72,7 +72,7 @@ class taixe_login extends Component {
                                 <button type="button" onClick={() => this.onSubmit()} className="btn btn-primary">Đăng nhập</button>
                             </form>
                         </div>
-                        <div class="col-lg-4">
+                        <div className="col-lg-4">
 
                         </div>
                     </div>

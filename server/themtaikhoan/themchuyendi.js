@@ -12,9 +12,12 @@ var cd = [
         sotien: 4000,
         // report: String,
 
-        bihuy: false,
-        daxong: true,
-        dangdi: false
+        status:'waiting',
+        xdi:'10.34534',
+        ydi:'106.354353',
+        xden:'10.1232',
+        yden:'106.9376'
+
     })
 ]
 var done = 0;

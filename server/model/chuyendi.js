@@ -9,9 +9,11 @@ var chuyendi = new Schema({
     sokm: Number,
     sotien: Number,
     // report: String,
+    status: String,
+    xdi:String,
+    ydi:String,
+    xden:String,
+    yden: String
 
-    bihuy: Boolean,
-    daxong: Boolean,
-    dangdi: Boolean
 })
 module.exports=mongoose.model('cd',chuyendi)
