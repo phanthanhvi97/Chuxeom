@@ -49,10 +49,10 @@ export default class khachdoimatkhau extends Component {
                         <div className="col-lg-4 mt-3">
                             <div className="form-group">
                                 Mật khẩu cũ
-                                <input type="text"
+                                <input type="password"
                                     className="form-control" name="oldpass" id="" placeholder="Old Pass" onChange={this.onChange} />
                                 Mật khẩu mới
-                                <input type="text"
+                                <input type="password"
                                     className="form-control" name="newpass" id="" placeholder="New Pass" onChange={this.onChange} />
                                 <button type="button" className="btn btn-primary mt-2" onClick={this.onChangePass}>Gửi</button>
                             </div>

@@ -37,17 +37,17 @@ var markicon = L.icon({
         // this.vitrihientai=this.vitrihientai.bind(this)
     }
     vitrihientai() {
-        // navigator.geolocation.getCurrentPosition((pos) => {
-        //     this.setState({
-        //     pos: { x: pos.coords.latitude, y: pos.coords.longitude },
-        //     });
-        // });
-        this.setState({
-            pos: {
-                x: 10.32423423,
-                y: 106.2343242
-            }
-        })
+        navigator.geolocation.getCurrentPosition((pos) => {
+            this.setState({
+            pos: { x: pos.coords.latitude, y: pos.coords.longitude },
+            });
+        });
+        // this.setState({
+        //     pos: {
+        //         x: 10.32423423,
+        //         y: 106.2343242
+        //     }
+        // })
     }
     
     // send_pos = () => {
@@ -74,23 +74,46 @@ var markicon = L.icon({
             var routes = e.routes;
             var a = routes[0].summary.totalDistance
             var tg = routes[0].summary.totalTime
-            
+            // console.log(routes)
             tg = Math.ceil(tg / 60)
             a = Math.ceil(a / 1000)
             this.setState({
                 distance: a,
                 time: tg
             })
+
+            //dia chi di
+            var quangduong=routes[0].name
+            localStorage.setItem('quangduong', quangduong)
+
+            //lay ra toa do bat dau
+            // console.log(routes)
+            var xbd=routes[0].waypoints[0].latLng.lat
+            var ybd=routes[0].waypoints[0].latLng.lng
+
+            // var bd=[xbd,ybd]
+            // console.log(bd)
+            var xkt=routes[0].waypoints[1].latLng.lat
+            var ykt=routes[0].waypoints[1].latLng.lng
+
+            // var kt=[xkt, ykt]
+
+            localStorage.setItem('xbd',xbd)
+            localStorage.setItem('ybd',ybd)
+
+            localStorage.setItem('xkt',xkt)
+            localStorage.setItem('ykt',ykt)
+
+
             var {dispatch} = this.props
             dispatch({type:"CHANGE",item:a})
+            // dispatch({type:"vivuive",item:a})
+
         }).addTo(map)
     }
     render() {
         const position = [this.state.pos.x, this.state.pos.y]
         // const position=[10.77257, 106.69802]
-        
-        // console.log(store.getState())
-
         return (
             <div>
                 <div>
@@ -122,4 +145,3 @@ var markicon = L.icon({
 export default connect(state =>{
     return {temp:state.temp}
 })(BanDo)
-// module.exports=store;

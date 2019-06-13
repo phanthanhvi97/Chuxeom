@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect, Link} from "react-router-dom";
 import BanDo from './map'
 import {connect} from 'react-redux'
+import axios from 'axios';
+
 class main_khach extends Component {
     constructor(props) {
         super(props)
@@ -11,11 +13,44 @@ class main_khach extends Component {
             loggingIn = false
         }
         this.state = {
-            loggingIn
+            loggingIn,            
         }
     }
     dangxuat = () => {
         localStorage.removeItem('token')
+    }
+    onDatXe=()=>{
+        // toa do xuat phat, ket thuc, id khach hang, so km, gia tien
+        var xbd = localStorage.getItem('xbd')
+        var ybd = localStorage.getItem('ybd')
+
+        var xkt = localStorage.getItem('xkt')
+        var ykt = localStorage.getItem('ykt')
+
+        var id = localStorage.getItem('token')
+
+        //quang duong
+        var quangduong=localStorage.getItem('quangduong')
+
+        if(xbd && xkt && id){
+            axios.post('http://localhost:8080/datxe',{
+                xbd: xbd,
+                ybd: ybd,
+
+                xkt: xkt,
+                ykt: ykt,
+
+                id: id,
+                km: this.props.temp,
+                sotien: this.props.temp*2000,
+
+                quangduong: quangduong
+            })
+            .then((kq)=>{
+
+            })
+        }
+
     }
     render() {
         if (this.state.loggingIn === false) {
@@ -48,7 +83,7 @@ class main_khach extends Component {
                             Số km: {this.props.temp}<br/>
                             Giá tiền: {this.props.temp*2000} vnd<br/>
                             <br/>
-                            <button type="button" className="btn btn-primary" onClick={()=>this.onDatXe}>Đặt xe</button>
+                            <button type="button" className="btn btn-primary" onClick={this.onDatXe}>Đặt xe</button>
                         </div>                        
                         <div className="col-lg-10 mt-3">
                             <BanDo />

@@ -6,8 +6,6 @@ var reducer = (state={temp:null}, action)=>{
         default:
             return state
     }
-        
-
 }
 var Store=()=>{
     var store = redux.createStore(reducer)

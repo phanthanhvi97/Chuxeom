@@ -4,14 +4,17 @@ var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/chuxeom')
 var cd = [
     new chuyendi({
-        sdtkhach: '123',
-        sdttaixe: '456',
-        diachidi: 'a',
-        diachiden: 'b',
-        status: 'da xong',
+        idkhach: '123',
+        idtaixe: '456',
+        quangduong: 'nha-truong',
+        // status: String,
         sokm: 2,
-        sotien: 12000,
-        report: 'tot'
+        sotien: 4000,
+        // report: String,
+
+        bihuy: false,
+        daxong: true,
+        dangdi: false
     })
 ]
 var done = 0;

@@ -5,11 +5,12 @@ var tktaixe = new Schema({
     password: String,
     hoten: String,
     bienso:String,
-    status: String,
     vitien: Number,
-    status: String,
-    vitri: String,
-    sao:[]
+    status: Boolean,
+    vitri: [],
+    sao:[],
+    avatar: String,
+    del: Boolean
 
 })
 module.exports=mongoose.model('tktx',tktaixe)
