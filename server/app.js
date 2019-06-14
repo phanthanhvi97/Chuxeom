@@ -1,6 +1,8 @@
 var express = require('express')
 var app = express()
 var server = require('http').Server(app)
+
+
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -92,7 +94,7 @@ app.post('/dangky', async (req, res) => {
         return res.json(false)
     }
     else {
-        tk.create({
+        tkk.create({
             sdt: sdt,
             password: password
         })
@@ -100,6 +102,27 @@ app.post('/dangky', async (req, res) => {
     }
 
 })
+
+
+
+
+app.post('/taixedangky', async (req, res) => {
+
+    var { sdt, password } = req.body
+    if (await tktx.findOne({ sdt: sdt }) !== null) {
+        return res.json(false)
+    }
+    else {
+        tktx.create({
+            sdt: sdt,
+            password: password
+        })
+        return res.json(true)
+    }
+
+})
+
+
 
 app.post('/khachdoipass', async (req, res) => {
     var { oldpass, newpass, _id } = req.body
@@ -203,6 +226,9 @@ app.post('/taixeguitoado',(req, res)=>{
         if(err){
             return handleError(err)
         }
+        if(data!==null){
+            // console.log(data)
+        }
     })
 
 })
@@ -213,25 +239,59 @@ app.post('/taixedangxuat',(req, res)=>{
         if(err){
             return handleError(err)
         }
+        
     })
 
 })
 
 
-app.post('/chuyendimoi',(req, res)=>{
-    var x
-    cd.findOne({idtaixe:x, status:'waiting'},(err,data)=>{
+app.post('/nhanchuyendi',(req, res)=>{
+    var {_id}=req.body
+    cd.findOne({idtaixe:_id, status:'waiting'},(err,data)=>{
         if(err){
             return handleError(err)
         }
         if(data===null){
-            return res.json({chuyendi:false})
+            return res.json({status:false})
         }
         else{
-            return res.json({chuyendi: true, kq: data})
+            return res.json({status: true, kq: data})
         }
     })
 })
+app.post('/huychuyen',(req, res)=>{
+    var {_idtaixe,_idkhach}=req.body
+    cd.findOneAndUpdate({idtaixe:_idtaixe},{$set:{status:'cancel'}},{new:true},(err, data)=>{
+        if(err){
+            return handleError(err)
+        }
+        console.log(data)
+    })
+
+})
+
+// app.post('/layrakhachdat', async (req, res) => {
+//     var {_id } = req.body
+//     await tkk.findOne({ _id: _id}, (err, data1) => {
+//         if (err) {
+//             return handleError(err)
+//         }
+//         if (data1 === null)
+//             return res.json({ status: false })
+//         else {
+//             return res.json({ status: true, kq1:data1 })
+//             // console.log(kq1.data1)
+//         }
+//     })
+// })
+
+
+
+
+
+
+
+
 server.listen(8080, console.log('Da khoi tao server 8080'))
 // var arr_pos=[]
 // io.on('connection',(socket)=>{

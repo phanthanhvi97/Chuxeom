@@ -21,7 +21,7 @@ class taixe_login extends Component {
             [name]: value
         });
     }
-    onSubmit() {
+    onLogin() {
         if (this.state.sdt !== '' && this.state.password !== '') {
             axios.post('http://localhost:8080/xacthuctaixe', {
                 sdt: this.state.sdt,
@@ -42,6 +42,25 @@ class taixe_login extends Component {
                 })
         }
         else {
+            alert('Khong duoc de trong')
+        }
+    }
+    onRegister(){
+        if(this.state.sdt!=='' && this.state.password !==''){
+            axios.post('http://localhost:8080/taixedangky',{
+            sdt: this.state.sdt,
+            password: this.state.password
+          })
+          .then((kq)=>{
+              if(kq.data===true){
+                alert('Dang ky thanh cong')
+              }
+              else{
+                  alert("Dang ky that bai")
+              }
+        })
+        }
+        else{
             alert('Khong duoc de trong')
         }
     }
@@ -69,7 +88,9 @@ class taixe_login extends Component {
                                     <label htmlFor="exampleInputPassword1">Mat khau</label>
                                     <input type="password" className="form-control" name="password" onChange={this.onChange} />
                                 </div>
-                                <button type="button" onClick={() => this.onSubmit()} className="btn btn-primary">Đăng nhập</button>
+                                <button type="button" onClick={() => this.onLogin()} className="btn btn-primary">Đăng nhập</button>
+                                <button type="button" onClick={() => this.onRegister()} className="btn btn-primary ml-5">Đăng ký</button>
+
                             </form>
                         </div>
                         <div className="col-lg-4">

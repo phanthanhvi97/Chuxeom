@@ -5,11 +5,13 @@ mongoose.connect('mongodb://localhost/chuxeom')
 var tkk=[
     new tkkhach({
         sdt: '123',
-        password: '123'
+        password: '123',
+        hoten:'vivuive'
     }),
     new tkkhach({
         sdt: '1234',
-        password: '1234'
+        password: '1234',
+        hoten:'vicute'
     })
 ]
 var done = 0;

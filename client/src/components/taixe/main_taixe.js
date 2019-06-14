@@ -12,20 +12,73 @@ export default class main_taixe extends Component {
             loggingIn = false
         }
         this.state = {
-            loggingIn
+            loggingIn,
+            x:'',
+            idkhach:'',
+            quangduong:'',
+            sokm:'',
+            sotien:'',
+            xdi:'',
+            xden:'',
+            ydi:'',
+            yden:'',
+            hoten:'',
+            sdt:''
         };
     };
+    componentDidMount(){
+        setInterval(() => {
+            axios.post('http://localhost:8080/nhanchuyendi',{
+                _id:localStorage.getItem('tokentaixe')
+            })
+            .then((kq)=>{
+                if(kq.data.status===false){
+                    this.setState({x:'Khong co chuyen di'})
+                }
+                else{
+                    this.setState({
+                        idkhach:kq.data.kq.idkhach,
+                        quangduong:kq.data.kq.quangduong,
+                        sokm:kq.data.kq.sokm,
+                        sotien:kq.data.kq.sotien,
+                        xdi:kq.data.kq.xdi,
+                        xden:kq.data.kq.xden,
+                        ydi:kq.data.kq.ydi,
+                        yden:kq.data.kq.yden
+                    })
+                    
+                }
+            })
+        }, 3000);
+    //     axios.post('http://localhost:8080/layrakhachdat',{
+    //                     _id:this.state.idkhach
+    //                 })
+    //                 .then((kq1)=>{
+    //                     console.log(kq1.data1)
+    //                 })
+    }
     dangxuat = () => {
         var a= localStorage.getItem('tokentaixe')
         localStorage.removeItem('tokentaixe')
-        console.log(a)
+        // console.log(a)
         axios.post('http://localhost:8080/taixedangxuat',{
             id: a,
             status: false
         })
-        // .then
+    }
+    nhanchuyen=()=>{
+
+    }
+    huychuyen=()=>{
+        // this.componentDidMount()
+        axios.post('http://localhost:8080/huychuyen',{
+            _idtaixe:localStorage.getItem('tokentaixe'),
+            _idkhach:this.state.idkhach 
+
+        })
     }
     render() {
+        // console.log(this.state.xinchao)
         if (this.state.loggingIn === false) {
             return <Redirect to='/'></Redirect>
         }
@@ -62,7 +115,15 @@ export default class main_taixe extends Component {
                 </div>
                 <div className="row">
                     <div className="col-lg-2 mt-5">
+                        {/* <form> */}
                         <h4>Chuyến đi của bạn</h4>
+                        <p>Người đặt: {this.state.idkhach}</p>
+                        <p>Quãng đường: {this.state.quangduong}</p>
+                        <p>Số km: {this.state.sokm}</p>
+                        <p>Số tiền: {this.state.sotien}</p>
+                        <button type="button" className="btn btn-primary" onClick={this.nhanchuyen}>Nhận chuyến: </button>
+                        <button type="button" className="btn btn-primary ml-2" onClick={this.huychuyen}>Huỷ bỏ: </button>
+                        {/* </form> */}
 
 
                     </div>
