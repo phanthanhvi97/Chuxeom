@@ -41,10 +41,10 @@ export default class main_taixe extends Component {
                         <div className="collapse navbar-collapse" id="collapsibleNavId">
                             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/main_khach/trothanhdoitac">Thông tin đối tác</a>
+                                    <a className="nav-link" href="/main_taixe/thongtintaixe">Thông tin đối tác</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/main_khach/vechungtoi">Về chúng tôi</a>
+                                    <a className="nav-link" href="/main_taixe/vechungtoi">Về chúng tôi</a>
                                 </li>
 
                             </ul>
@@ -53,7 +53,7 @@ export default class main_taixe extends Component {
                                 <button className="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Đối tác</button>
                                 <div className="dropdown-menu" aria-labelledby="dropdownId">
                                     {/* eslint-disable-next-line */}
-                                    <a href='main_khach/khachdoimatkhau' className="dropdown-item">Đổi mật khẩu</a>
+                                    <a href='main_taixe/taixedoimatkhau' className="dropdown-item" >Đổi mật khẩu</a>
                                     <a className="dropdown-item" href="/" onClick={this.dangxuat}>Đăng xuất</a>
                                 </div>
                             </div>

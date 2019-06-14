@@ -114,6 +114,41 @@ app.post('/khachdoipass', async (req, res) => {
         }
     })
 })
+app.post('/taixedoipass', async (req, res) => {
+    var { oldpass, newpass, _id } = req.body
+    tktx.findOneAndUpdate({ _id: _id, password: oldpass }, { $set: { password: newpass } }, { new: true }, (err, data) => {
+        if (err) {
+            return handleError(err)
+        }
+        if (data === null)
+            return res.json({ status: false })
+        else {
+            return res.json({ status: true })
+        }
+    })
+})
+
+
+
+app.post('/loadthongtintaixe', async (req, res) => {
+    var {_id } = req.body
+    tktx.findOne({ _id: _id}, (err, data) => {
+        if (err) {
+            return handleError(err)
+        }
+        if (data === null)
+            return res.json({ status: false })
+        else {
+            return res.json({ status: true, kq:data })
+        }
+    })
+})
+
+
+
+
+
+
 
 app.post('/datxe', async (req, res) => {
 
