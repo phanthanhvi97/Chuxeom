@@ -23,7 +23,9 @@ export default class main_taixe extends Component {
             ydi:'',
             yden:'',
             hoten:'',
-            sdt:''
+            sdt:'',
+            idchuyendi:'',
+            btn:true
         };
     };
     componentDidMount(){
@@ -34,6 +36,7 @@ export default class main_taixe extends Component {
             .then((kq)=>{
                 if(kq.data.status===false){
                     this.setState({x:'Khong co chuyen di'})
+                    // alert('Khong co tai xe gan ban')
                 }
                 else{
                     this.setState({
@@ -44,7 +47,8 @@ export default class main_taixe extends Component {
                         xdi:kq.data.kq.xdi,
                         xden:kq.data.kq.xden,
                         ydi:kq.data.kq.ydi,
-                        yden:kq.data.kq.yden
+                        yden:kq.data.kq.yden,
+                        idchuyendi:kq.data.kq._id
                     })
                     
                 }
@@ -67,13 +71,19 @@ export default class main_taixe extends Component {
         })
     }
     nhanchuyen=()=>{
-
+        this.setState({
+            btn:!this.state.btn
+        })
     }
     huychuyen=()=>{
+        // this.setState({
+        //     btn:!this.state.btn
+        // })
         // this.componentDidMount()
         axios.post('http://localhost:8080/huychuyen',{
             _idtaixe:localStorage.getItem('tokentaixe'),
-            _idkhach:this.state.idkhach 
+            _idkhach:this.state.idkhach ,
+            _idchuyendi:this.state.idchuyendi
 
         })
     }
@@ -121,8 +131,11 @@ export default class main_taixe extends Component {
                         <p>Quãng đường: {this.state.quangduong}</p>
                         <p>Số km: {this.state.sokm}</p>
                         <p>Số tiền: {this.state.sotien}</p>
-                        <button type="button" className="btn btn-primary" onClick={this.nhanchuyen}>Nhận chuyến: </button>
-                        <button type="button" className="btn btn-primary ml-2" onClick={this.huychuyen}>Huỷ bỏ: </button>
+                        <button type="button" className="btn btn-primary" onClick={this.nhanchuyen}>{this.state.btn===true?'Nhận chuyến':'Huỷ chuyến'} </button>
+
+
+                        
+                        {this.state.btn===true?<button type="button" className="btn btn-primary ml-2" onClick={this.huychuyen}>Huỷ bỏ: </button>:''}
                         {/* </form> */}
 
 

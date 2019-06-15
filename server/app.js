@@ -193,7 +193,7 @@ app.post('/datxe', async (req, res) => {
         }
         // console.log(min)
         if (min === 5.0000001) {
-            res.json(false)
+            res.json({kq:false})
             console.log('haha')
         }
         else {
@@ -210,7 +210,7 @@ app.post('/datxe', async (req, res) => {
                 xden:xkt,
                 yden: ykt
             })
-            res.json(true)
+            res.json({kq:true})
 
         }
     })
@@ -260,16 +260,70 @@ app.post('/nhanchuyendi',(req, res)=>{
     })
 })
 app.post('/huychuyen',(req, res)=>{
-    var {_idtaixe,_idkhach}=req.body
+    var {_idtaixe,_idkhach, _chuyendi}=req.body
     cd.findOneAndUpdate({idtaixe:_idtaixe},{$set:{status:'cancel'}},{new:true},(err, data)=>{
         if(err){
             return handleError(err)
         }
-        console.log(data)
+        // console.log(data)
     })
-
 })
 
+
+app.post('/loadtaixe',(req, res)=>{
+    var {_id}=req.body
+    tktx.find({},(err, data)=>{
+        // console.log(data)
+        return res.json({kq:data})
+    })
+})
+
+app.post('/loadkhachhang',(req, res)=>{
+    // var {_id}=req.body
+    tkk.find({},(err, data)=>{
+        // console.log(data)
+        return res.json({kq:data})
+    })
+})
+
+app.post('/loadchuyendi',(req, res)=>{
+    // var {_id}=req.body
+    cd.find({},(err, data)=>{
+        // console.log(data)
+        return res.json({kq:data})
+    })
+})
+
+
+app.post('/adminxoataikhoantaixe',(req, res)=>{
+    var {_id}=req.body
+    tktx.findOneAndUpdate({_id:_id,del:false},{$set:{del:true}},{new:true},(err, data)=>{
+        // if(err){
+        //     return handleError(err)
+        // }
+        if(data===null){
+            res.json({status:false})
+        }
+        else{
+            res.json({status:true, kq:data})
+        }
+    })
+})
+
+app.post('/adminkichhoattaikhoantaixe',(req, res)=>{
+    var {_id}=req.body
+    tktx.findOneAndUpdate({_id:_id,del:true},{$set:{del:false}},{new:true},(err, data)=>{
+        // if(err){
+        //     return handleError(err)
+        // }
+        if(data===null){
+            res.json({status:false})
+        }
+        else{
+            res.json({status:true, kq:data})
+        }
+    })
+})
 // app.post('/layrakhachdat', async (req, res) => {
 //     var {_id } = req.body
 //     await tkk.findOne({ _id: _id}, (err, data1) => {

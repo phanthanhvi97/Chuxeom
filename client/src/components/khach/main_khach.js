@@ -47,7 +47,12 @@ class main_khach extends Component {
                 quangduong: quangduong
             })
             .then((kq)=>{
-                
+                if(kq.data.kq===false){
+                    alert('Khong co tai xe gan ban')
+                }
+                else if(kq.data.kq===true){
+                    alert('Cho tai xe xac nhan')
+                }
             })
         }
 
