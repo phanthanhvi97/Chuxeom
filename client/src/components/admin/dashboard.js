@@ -9,9 +9,9 @@ import Ttcd from './ttcd'
 export default class dashboard extends Component {
     constructor(props) {
         super(props)
-        const tokentaixe = localStorage.getItem('tokenadmin')
+        const tokenadmin = localStorage.getItem('tokenadmin')
         let loggingIn = true
-        if (tokentaixe === null) {
+        if (tokenadmin === null) {
             loggingIn = false
         }
         this.state = {

@@ -60,7 +60,7 @@ app.post('/xacthuckhach', async (req, res) => {
 app.post('/xacthuctaixe', async (req, res) => {
 
     var { sdt, password } = req.body
-    await tktx.findOne({ sdt: sdt, password: password }, (err, data) => {
+    await tktx.findOne({ sdt: sdt, password: password, del:false}, (err, data) => {
         if (err) {
             return handleError(err)
         }
@@ -324,20 +324,20 @@ app.post('/adminkichhoattaikhoantaixe',(req, res)=>{
         }
     })
 })
-// app.post('/layrakhachdat', async (req, res) => {
-//     var {_id } = req.body
-//     await tkk.findOne({ _id: _id}, (err, data1) => {
-//         if (err) {
-//             return handleError(err)
-//         }
-//         if (data1 === null)
-//             return res.json({ status: false })
-//         else {
-//             return res.json({ status: true, kq1:data1 })
-//             // console.log(kq1.data1)
-//         }
-//     })
-// })
+app.post('/layrakhachdat', async (req, res) => {
+    var {_id } = req.body
+    await tkk.findOne({ _id: _id}, (err, data1) => {
+        if (err) {
+            return handleError(err)
+        }
+        if (data1 === null)
+            return res.json({ status: false })
+        else {
+            return res.json({ status: true, kq1:data1 })
+            // console.log(kq1.data1)
+        }
+    })
+})
 
 
 
